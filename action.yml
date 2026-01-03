@@ -4,21 +4,21 @@ description: >-
   pages
 inputs:
   source-before-directory:
-    description: Source before directory from the origin directory
+    description:  Source before directory from the origin directory
     required: false
   source-directory:
     description: Source directory from the origin directory
-    required: true
+    required:  true
   destination-github-username:
     description: Name of the destination username/organization
-    required: true
+    required:  true
   destination-repository-name:
     description: Destination repository
     required: true
   user-email:
     description: Email for the git commit
-    required: true
-  github-server:
+    required:  true
+  github-server: 
     description: 'Github server'
     default: 'github.com'
     required: false
@@ -40,25 +40,31 @@ inputs:
     required: false
   commit-message:
     description: >-
-      [Optional] commit message for the output repository. ORIGIN_COMMIT is
+      [Optional] commit message for the output repository.  ORIGIN_COMMIT is
       replaced by the URL@commit in the origin repo
     default: Update from ORIGIN_COMMIT
     required: false
-  target-directory:
+  target-directory: 
     description: '[Optional] The directory to wipe and replace in the target repository'
     default: ''
     required: false
   create-target-branch-if-needed:
     type: boolean
     description: >-
-      [Optional] create target branch if not exist. Defaults to `false`
+      [Optional] create target branch if not exist.  Defaults to `false`
+    default: false
+    required: false
+  force-push:
+    type: boolean
+    description: >-
+      [Optional] force push to the target branch. Defaults to `false`
     default: false
     required: false
 
-runs:
+runs: 
   using: docker
   image: Dockerfile
-  args:
+  args: 
     - '${{ inputs.source-before-directory }}'
     - '${{ inputs.source-directory }}'
     - '${{ inputs.destination-github-username }}'
@@ -71,6 +77,7 @@ runs:
     - '${{ inputs.commit-message }}'
     - '${{ inputs.target-directory }}'
     - '${{ inputs.create-target-branch-if-needed }}'
-branding:
+    - '${{ inputs.force-push }}'
+branding: 
   icon: git-commit
   color: green
